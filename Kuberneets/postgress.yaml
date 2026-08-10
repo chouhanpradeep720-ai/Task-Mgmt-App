@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+  namespace: 
+spec:
+  replicas: 1
+  selector:
+    matchLables:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+      spec:
+        containers:
+          - name: postgres
+            image: postgres:latest
+            ports:
+              - containerPort: 5432
+            env:
+              - name: POSTGRES_USER
+                value: "your_username"
+              - name: POSTGRES_PASSWORD
+                value: "your_password"
+              - name: POSTGRES_DB
+                value: "your_database"

@@ -1,0 +1,178 @@
+import Navbar from "../components/layout/Navbar";
+import Sidebar from "../components/layout/Sidebar";
+
+
+function Analytics() {
+
+    return (
+
+        <div className="dashboard-layout">
+
+
+            <Sidebar />
+
+
+            <div className="dashboard-main">
+
+
+                <Navbar />
+
+
+                <div className="dashboard-content">
+
+
+                    <div className="welcome-card">
+
+
+                        <h1>
+                            📊 Analytics Dashboard
+                        </h1>
+
+
+                        <p>
+                            Track your team's productivity and task performance.
+                        </p>
+
+
+                    </div>
+
+
+
+
+                    <div className="summary-grid">
+
+
+                        <div className="summary-card">
+
+                            <h5>
+                                Total Tasks
+                            </h5>
+
+                            <h2 className="blue">
+                                120
+                            </h2>
+
+                        </div>
+
+
+
+                        <div className="summary-card">
+
+                            <h5>
+                                Completed
+                            </h5>
+
+                            <h2 className="green">
+                                85
+                            </h2>
+
+                        </div>
+
+
+
+                        <div className="summary-card">
+
+                            <h5>
+                                Pending
+                            </h5>
+
+                            <h2 className="orange">
+                                35
+                            </h2>
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+                    <div className="welcome-card">
+
+
+                        <h2>
+                            Task Completion Rate
+                        </h2>
+
+
+                        <div style={{
+                            background:"#e2e8f0",
+                            borderRadius:"20px",
+                            height:"25px",
+                            marginTop:"20px"
+                        }}>
+
+
+                            <div style={{
+                                width:"70%",
+                                height:"100%",
+                                background:
+                                "linear-gradient(90deg,#2563eb,#06b6d4)",
+                                borderRadius:"20px"
+                            }}>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                        <p style={{marginTop:"15px"}}>
+
+                            70% tasks completed successfully
+
+                        </p>
+
+
+                    </div>
+
+
+
+
+
+
+                    <div className="welcome-card">
+
+
+                        <h2>
+                            Priority Distribution
+                        </h2>
+
+
+                        <p>
+                            🔴 High Priority : 40 Tasks
+                        </p>
+
+
+                        <p>
+                            🟡 Medium Priority : 50 Tasks
+                        </p>
+
+
+                        <p>
+                            🟢 Low Priority : 30 Tasks
+                        </p>
+
+
+                    </div>
+
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    );
+
+}
+
+
+export default Analytics;

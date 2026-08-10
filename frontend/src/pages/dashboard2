@@ -1,0 +1,77 @@
+import Navbar from "../components/layout/Navbar";
+import Sidebar from "../components/layout/Sidebar";
+
+import SummaryCard from "../components/dashboard/SummaryCard";
+import TaskForm from "../components/task/TaskForm";
+import TaskTable from "../components/task/TaskTable";
+
+function Dashboard() {
+
+    return (
+
+        <div className="dashboard-layout">
+
+            <Sidebar />
+
+            <div className="dashboard-main">
+
+                <Navbar />
+
+                <div className="dashboard-content">
+
+                    <div
+                        id="dashboard-top"
+                        className="welcome-card"
+                    >
+
+                        <h1>
+                            Welcome Commander 👋
+                        </h1>
+
+                        <p>
+                            Manage your cloud tasks from one powerful workspace.
+                        </p>
+
+                    </div>
+
+                    <div className="summary-grid">
+
+                        <SummaryCard
+                            title="Total Tasks"
+                            value="12"
+                            color="blue"
+                        />
+
+                        <SummaryCard
+                            title="Completed"
+                            value="8"
+                            color="green"
+                        />
+
+                        <SummaryCard
+                            title="Pending"
+                            value="4"
+                            color="orange"
+                        />
+
+                    </div>
+
+                    <div id="tasks-section">
+
+                        <TaskForm />
+
+                        <TaskTable />
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    );
+
+}
+
+export default Dashboard;

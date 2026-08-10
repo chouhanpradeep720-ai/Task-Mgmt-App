@@ -1,0 +1,76 @@
+function Navbar(){
+
+
+    return (
+
+        <header className="navbar">
+
+
+            <div className="navbar-heading">
+
+
+                <h2>
+                    Task Command Center
+                </h2>
+
+
+                <p>
+                    Cloud Commander Management System
+                </p>
+
+
+            </div>
+
+
+
+
+            <div className="navbar-actions">
+
+
+                <button className="bell">
+
+                    🔔
+
+                </button>
+
+
+
+                <div className="user-profile">
+
+
+                    <div className="user-avatar">
+
+                        CC
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Cloud Commander
+                        </strong>
+
+
+                        <small>
+                            Admin
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </header>
+
+    );
+
+
+}
+
+
+export default Navbar;
