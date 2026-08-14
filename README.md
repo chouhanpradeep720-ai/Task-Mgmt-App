@@ -52,4 +52,251 @@ The application is built with a modern web architecture, using React for the fro
 
 ```
 
+# ✨ Features
 
+
+| Feature | Description |
+|--------|-------------|
+| 🐳 Dockerized Application | Complete application runs inside containers |
+| 🏗️ Three Tier Architecture | Frontend, Backend and Database separated |
+| 🔄 Reverse Proxy | Nginx forwards API requests to backend |
+| 🔐 Environment Configuration | Database credentials managed using .env |
+| 💾 Persistent Database | PostgresSql data stored using Docker volumes |
+| 📦 Multi-stage Builds | Optimized Docker images |
+| ❤️ Health Monitoring | Container health checks |
+| 🚀 Easy Deployment | Start entire application with one command |
+
+
+---
+
+# 📋 Prerequisites
+
+
+Before running the project install:
+
+
+| Tool | Version |
+|-|-|
+| Docker Desktop | Latest |
+| Docker Compose | Latest |
+
+
+No need to install:
+
+- Java
+- PostgresSql
+- Node.js
+
+
+Everything runs inside Docker containers.
+
+
+---
+
+---
+
+# ⚡ Quick Start
+
+
+## 1. Clone Repository
+
+
+```bash
+git clone https://github.com/chouhanpradeep720-ai/Task-Mgmt-App.git
+cd Task-Mgmt-App
+```
+
+
+---
+
+## 2. Create Environment File
+
+
+Create `.env` file:
+
+
+```env
+
+PORT=5000
+
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=task_management
+DB_USER=postgres
+DB_PASSWORD=your-postgresql-password
+
+
+```
+
+---
+
+---
+
+## 3. Start Application
+
+
+```bash
+docker compose up --build
+```
+
+
+Run in background:
+
+
+```bash
+docker compose up -d --build
+```
+
+
+---
+
+# 🌐 Application URLs
+
+
+| Service | URL |
+|-|-|
+| Frontend | http://localhost: |
+| Backend API | http://localhost:5000|
+| Database | localhost:5432 |
+| Backend HealthCheack | http://localhost:5000/actuator/health |
+
+---
+
+---
+
+# 🐳 Docker Commands
+
+
+## Start containers
+
+```bash
+docker compose up -d
+```
+
+
+## Stop containers
+
+```bash
+docker compose down
+```
+
+
+## View running containers
+
+```bash
+docker ps
+```
+
+
+## View logs
+
+
+```bash
+docker compose logs -f
+```
+
+
+## Rebuild images
+
+
+```bash
+docker compose up --build
+```
+
+
+
+---
+
+# 🔨 Docker Images
+
+
+Build Backend Image:
+
+
+```bash
+docker build -t task-app-backend ./backend
+```
+
+
+Build Frontend Image:
+
+
+```bash
+docker build -t task-app-frontend ./frontend
+```
+
+---
+
+
+---
+
+# 🐳 Docker Architecture
+
+
+```
+
+frontend-container
+
+        |
+        |
+        ▼
+
+backend-container
+
+        |
+        |
+        ▼
+
+postgressql-container
+
+
+```
+
+
+Each service runs independently and communicates through Docker network.
+
+
+
+---
+
+# 🚨 Troubleshooting
+
+
+| Problem | Solution |
+|-|-|
+| Frontend not loading | Check nginx container logs |
+| Backend not responding | Check backned container logs |
+| Database connection error | Verify .env credentials |
+| Port already used | Change port mapping in docker-compose.yml |
+| Container stopped | Run docker compose ps |
+
+
+
+---
+
+# 📚 DevOps Concepts Used
+
+
+| Concept | Usage |
+|-|-|
+| Containerization | Docker containers |
+| Image Building | Dockerfile |
+| Multi-stage Build | Optimized images |
+| Reverse Proxy | Nginx routing |
+| Service Discovery | Docker network |
+| Environment Variables | Secure configuration |
+| Persistent Storage | PostgresSQL volume |
+
+
+
+---
+
+<div align="center">
+
+## 📝 Task Management App
+
+A scalable task management and team collaboration platform designed to streamline task creation, assignment, tracking, and completion.
+
+**Tech Stack:** React · Node.js · PostgreSQL · Docker · Nginx
+
+</div>
