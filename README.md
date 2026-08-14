@@ -61,7 +61,7 @@ The application is built with a modern web architecture, using React for the fro
 | 🏗️ Three Tier Architecture | Frontend, Backend and Database separated |
 | 🔄 Reverse Proxy | Nginx forwards API requests to backend |
 | 🔐 Environment Configuration | Database credentials managed using .env |
-| 💾 Persistent Database | PostgresSql data stored using Docker volumes |
+| 💾 Persistent Database | PostgreSQL data stored using Docker volumes |
 | 📦 Multi-stage Builds | Optimized Docker images |
 | ❤️ Health Monitoring | Container health checks |
 | 🚀 Easy Deployment | Start entire application with one command |
@@ -84,7 +84,7 @@ Before running the project install:
 No need to install:
 
 - Java
-- PostgresSql
+- PostgreSQL
 - Node.js
 
 
@@ -247,7 +247,7 @@ backend-container
         |
         ▼
 
-postgressql-container
+PostgreSQL-container
 
 
 ```
@@ -285,7 +285,7 @@ Each service runs independently and communicates through Docker network.
 | Reverse Proxy | Nginx routing |
 | Service Discovery | Docker network |
 | Environment Variables | Secure configuration |
-| Persistent Storage | PostgresSQL volume |
+| Persistent Storage | PostgreSQL volume |
 
 
 
