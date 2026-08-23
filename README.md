@@ -124,7 +124,8 @@ DB_PORT=5432
 DB_NAME=task_management
 DB_USER=postgres
 DB_PASSWORD=your-postgresql-password
-
+ADMIN_USERNAME=appliction-username
+ADMIN_PASSWORD=appication-password
 
 ```
 
