@@ -9,6 +9,7 @@ const authRoutes = require("./routes/authRoutes");
 const taskController = require("./controllers/taskController");
 const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
+const client = require("prom-client");
 
 const app = express();
 
@@ -16,9 +17,30 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+
+// Node.js default metrics
+client.collectDefaultMetrics();
+
 // ---- Health check (handy for Docker/Kubernetes readiness probes later) ----
 app.get("/health", (req, res) => {
   res.status(200).json({ status: "ok" });
+});
+
+// ---- Readiness probe (handy for Docker/Kubernetes readiness probes later) ----
+app.get('/ready', async (req, res) => {
+  try {
+    await pool.query('SELECT 1');
+
+    res.status(200).json({ status: 'READY' });
+  } catch (error) {
+    res.status(503).json({ status: 'NOT_READY' });
+  }
+});
+
+// ---- Prometheus metrics endpoint ----
+app.get("/metrics", async (req, res) => {
+  res.set("Content-Type", client.register.contentType);
+  res.end(await client.register.metrics());
 });
 
 // ---- Routes ----
