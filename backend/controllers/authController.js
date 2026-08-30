@@ -1,4 +1,11 @@
 const pool = require("../config/db");
+const client = require("prom-client");
+
+const loginAttemptsTotal = new client.Counter({
+    name: "login_attempts_total",
+    help: "Total number of login attempts",
+    labelNames: ["status"],
+});
 
 
 async function login(req, res) {
@@ -9,6 +16,8 @@ async function login(req, res) {
 
 
         if (!username || !password) {
+
+        loginAttemptsTotal.inc({ status: "failure" });
 
             return res.status(400).json({
                 message: "Username and password required"
@@ -25,6 +34,8 @@ async function login(req, res) {
 
         if (result.rows.length === 0) {
 
+           loginAttemptsTotal.inc({ status: "failure" });
+
             return res.status(401).json({
                 message: "Invalid username or password"
             });
@@ -37,13 +48,16 @@ async function login(req, res) {
 
         if (user.password !== password) {
 
+
+            loginAttemptsTotal.inc({ status: "failure" });
+
             return res.status(401).json({
                 message: "Invalid username or password"
             });
 
         }
 
-
+        loginAttemptsTotal.inc({ status: "success" });
         res.json({
 
             message: "Login successful",

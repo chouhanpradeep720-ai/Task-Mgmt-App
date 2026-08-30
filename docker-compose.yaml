@@ -1,7 +1,7 @@
 services:
 
   frontend:
-    build: ./frontend
+    image: pradeepchouhan115/task-app-frontend:latest
     container_name: frontend
     ports:
     - "80:80"
@@ -10,7 +10,7 @@ services:
 
 
   backend:
-    build: ./backend
+    image: pradeepchouhan115/task-app-backend:latest
     container_name: backend
     ports:
     - "5000:5000"

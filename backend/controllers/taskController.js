@@ -2,6 +2,23 @@
 // Business logic + request/response handling. Routes just point here.
 
 const taskModel = require("../models/taskModel");
+const client = require("prom-client");
+
+const tasksCreatedTotal = new client.Counter({
+  name: "tasks_created_total",
+  help: "Total number of tasks created",
+});
+
+const tasksCompletedTotal = new client.Counter({
+  name: "tasks_completed_total",
+  help: "Total number of tasks marked as completed",
+});
+
+const tasksDeletedTotal = new client.Counter({
+  name: "tasks_deleted_total",
+  help: "Total number of tasks deleted",
+});
+
 
 // GET /api/dashboard
 async function getDashboardSummary(req, res) {
@@ -41,6 +58,7 @@ async function createTask(req, res) {
       status,
       dueDate,
     });
+    tasksCreatedTotal.inc(); // Increment the counter for created tasks
 
     res.status(201).json(newTask);
   } catch (err) {
@@ -84,6 +102,7 @@ async function deleteTask(req, res) {
     if (!deleted) {
       return res.status(404).json({ error: "Task not found" });
     }
+    tasksDeletedTotal.inc(); // Increment the counter for deleted tasks
 
     res.status(200).json({ message: "Task deleted successfully", id: deleted.id });
   } catch (err) {
@@ -106,6 +125,10 @@ async function markTaskComplete(req, res) {
     }
 
     const updatedTask = await taskModel.updateTaskStatus(id, status);
+    
+    if (status === "Completed") {
+    tasksCompletedTotal.inc();
+  }
     res.status(200).json(updatedTask);
   } catch (err) {
     console.error("Error updating task status:", err.message);

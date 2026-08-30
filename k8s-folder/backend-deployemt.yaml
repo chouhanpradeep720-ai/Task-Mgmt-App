@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: backend:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: DB_HOST
+        - name: DB_PORT  
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: DB_PORT
+        - name: DB_USER      
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: DB_USER
+        - name: DB_NAME      
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: DB_NAME
+        - name: ADMIN_USERNAME      
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: ADMIN_USERNAME
+        - name: DB_PASSWORD      
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: DB_PASSWORD
+        - name: Admin_PASSWORD      
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: Admin_PASSWORD
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 20
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 5000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          failureThreshold: 30
+          periodSeconds: 10  
+
+
