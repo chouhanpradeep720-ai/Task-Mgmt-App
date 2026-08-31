@@ -35,8 +35,11 @@ spec:
             configMapKeyRef:
               name: backend-config
               key: DB_NAME  
-    volumes:
-      - name: init-script
-        configMap:
-          name: postgres-init-scripts
+        volumeMounts:
+        - name: init-script
+        mountPath: /docker-entrypoint-initdb.d      
+      volumes:
+        - name: init-script
+          configMap:
+            name: postgres-init-scripts
 
