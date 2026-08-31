@@ -6,7 +6,7 @@ metadata:
 spec:
   selector:
     app: postgres
-  ClusterIP: None
+  clusterIP: None
   ports:
     - port: 5432
       targetPort: 5432

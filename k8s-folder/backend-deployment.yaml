@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend-deployment
+  namespace: task-management
 spec:
   replicas: 1
   selector:
@@ -18,6 +19,11 @@ spec:
         ports:
         - containerPort: 5000
         env:
+        - name: PORT
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: PORT
         - name: DB_HOST
           valueFrom:
             configMapKeyRef:
@@ -48,11 +54,11 @@ spec:
             secretKeyRef:
               name: backend-secret
               key: DB_PASSWORD
-        - name: Admin_PASSWORD      
+        - name: ADMIN_PASSWORD      
           valueFrom:
             secretKeyRef:
               name: backend-secret
-              key: Admin_PASSWORD
+              key: ADMIN_PASSWORD
         livenessProbe:
           httpGet:
             path: /health

@@ -9,31 +9,34 @@ spec:
   selector:
     matchLabels:
       app: postgres
-    template:
-      metadata:
-        labels:
-          app: postgres
-      spec:
-        containers:
-        - name: postgres
-          image: postgres:latest
-          ports:
-          - containerPort: 5432
-          env:
-          - name: POSTGRES_USER
-            valueFrom:
-              configMapKeyRef:
-                name: backend-config
-                key: DB_USER
-          - name: POSTGRES_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: backend-secret
-                key: DB_PASSWORD
-          - name: POSTGRES_DB
-            valueFrom:
-              configMapKeyRef:
-                name: backend-config
-                key: DB_NAME  
-
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:latest
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: DB_USER
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: DB_PASSWORD
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: DB_NAME  
+    volumes:
+      - name: init-script
+        configMap:
+          name: postgres-init-scripts
 

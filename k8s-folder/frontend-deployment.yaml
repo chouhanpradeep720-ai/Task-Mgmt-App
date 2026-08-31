@@ -12,31 +12,31 @@ spec:
     metadata:
       labels:
         app: frontend
-      spec:
+    spec:
        containers:
        - name: frontend
          image: pradeepchouhan115/task-app-frontend:latest
          ports:
          - containerPort: 80
-       livenessProbe:
-         httpGet:
-            path: /health
+         livenessProbe:
+          httpGet:
+              path: /health
+              port: 80
+          initialDelaySeconds: 20
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+         readinessProbe:
+          httpGet:
+              path: /ready
+              port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+         startupProbe:
+          httpGet:
+            path: /health  
             port: 80
-         initialDelaySeconds: 20
-         periodSeconds: 5
-         timeoutSeconds: 3
-         failureThreshold: 3
-       readinessProbe:
-         httpGet:
-            path: /ready
-            port: 80
-         initialDelaySeconds: 10
-         periodSeconds: 5
-         timeoutSeconds: 3
-         failureThreshold: 3
-       startupProbe:
-         httpGet:
-          path: /health  
-          port: 80
-         failureThreshold: 30
-         periodSeconds: 10  
+          failureThreshold: 30
+          periodSeconds: 10  
