@@ -75,7 +75,7 @@ jobs:
       # 10. Image Push To Docker Hub
       - name: Pushing Image To Docker Hub
         run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APP_NAME }}:${{ github.sha }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APP_NAME }}:${{ steps.vars.outputs.sha_short }}
 
   deploy-to-kind:
     name: deploy to kind cluster
