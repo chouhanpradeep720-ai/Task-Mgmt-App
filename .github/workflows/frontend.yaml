@@ -15,6 +15,10 @@ jobs:
   checkout-and-image-build:
     name: checkout and image build
     runs-on: ubuntu-latest
+
+    outputs:
+    image_tag: ${{ steps.vars.outputs.sha_short }}
+
     steps:
       # 1. Checkout the repository
       - name: Checkout code
@@ -85,9 +89,9 @@ jobs:
       - checkout-and-image-build
 
     steps:
-      - name: Set image variables
-        id: vars
-        run: echo "sha_short=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+      # - name: Set image variables
+      #   id: vars
+      #   run: echo "sha_short=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
 
       - name: Deploy to Kind Cluster via SSH
         uses: appleboy/ssh-action@v1.0.3
@@ -103,7 +107,7 @@ jobs:
               echo "APP_NAME=${{ env.APP_NAME }}"
               echo "SHA_SHORT=${{ steps.vars.outputs.sha_short }}"
               # 1. Image update karein
-              kubectl set image deployment/frontend-deployment frontend=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APP_NAME }}:${{ steps.vars.outputs.sha_short }} -n task-management
+              kubectl set image deployment/frontend-deployment frontend=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APP_NAME }}:${{ needs.build.outputs.image_tag }} -n task-management
               
               # 2. Status verify karein (90 seconds tak wait karega)
               kubectl rollout status deployment/frontend-deployment -n task-management --timeout=30s
