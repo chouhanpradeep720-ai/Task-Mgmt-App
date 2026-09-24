@@ -98,9 +98,9 @@ jobs:
            bash -lc '
             kubectl version --client
               # 1. Image update karein
-              kubectl set image deployment/frontend-deployment frontend=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APP_NAME }}:${{ github.sha }} -n task-management
+              kubectl set image deployment/frontend-deployment frontend=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APP_NAME }}:${{ steps.vars.outputs.sha_short }} -n task-management
               
               # 2. Status verify karein (90 seconds tak wait karega)
-              kubectl rollout status deployment/frontend-deployment-n task-management --timeout=90s
+              kubectl rollout status deployment/frontend-deployment -n task-management --timeout=90s
             '
 
