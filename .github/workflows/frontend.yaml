@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-    image_tag: ${{ steps.vars.outputs.sha_short }}
+      image_tag: ${{ steps.vars.outputs.sha_short }}
 
     steps:
       # 1. Checkout the repository
