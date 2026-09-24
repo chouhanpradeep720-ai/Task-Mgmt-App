@@ -10,6 +10,7 @@ const taskController = require("./controllers/taskController");
 const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
 const client = require("prom-client");
+const pool = require("./config/db");
 
 
 const app = express();
@@ -97,7 +98,11 @@ app.get('/ready', async (req, res) => {
     await pool.query('SELECT 1');
 
     res.status(200).json({ status: 'READY' });
-  } catch (error) {
+  //} catch (error) {
+   // res.status(503).json({ status: 'NOT_READY' });
+  //}
+    } catch (error) {
+    console.error("❌ Readiness check failed:", error);
     res.status(503).json({ status: 'NOT_READY' });
   }
 });

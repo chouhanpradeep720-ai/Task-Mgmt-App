@@ -37,7 +37,7 @@ spec:
               key: DB_NAME  
         volumeMounts:
         - name: init-script
-        mountPath: /docker-entrypoint-initdb.d      
+          mountPath: /docker-entrypoint-initdb.d      
       volumes:
         - name: init-script
           configMap:

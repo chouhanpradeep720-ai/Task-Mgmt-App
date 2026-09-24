@@ -29,6 +29,7 @@ async function createAdmin() {
     console.log(`✅ Admin '${username}' created successfully.`);
   } catch (error) {
     console.error("❌ Failed to create admin:", error.message);
+    throw error;
   }
 }
 
