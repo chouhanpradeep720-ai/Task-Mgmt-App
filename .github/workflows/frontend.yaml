@@ -107,7 +107,7 @@ jobs:
               echo "APP_NAME=${{ env.APP_NAME }}"
               echo "SHA_SHORT=${{ steps.vars.outputs.sha_short }}"
               # 1. Image update karein
-              kubectl set image deployment/frontend-deployment frontend=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APP_NAME }}:${{ needs.build.outputs.image_tag }} -n task-management
+              kubectl set image deployment/frontend-deployment frontend=${{ secrets.DOCKERHUB_USERNAME }}/${{ needs.checkout-and-image-build.outputs.image_tag }} -n task-management
               
               # 2. Status verify karein (90 seconds tak wait karega)
               kubectl rollout status deployment/frontend-deployment -n task-management --timeout=30s
