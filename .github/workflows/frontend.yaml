@@ -8,15 +8,13 @@ on:
       - "frontend/*"
       - ".github/workflows/frontend.yaml"
 
+env:
+      APP_NAME: "task-app-frontend"
 
 jobs:
   checkout-and-image-build:
     name: checkout and image build
     runs-on: ubuntu-latest
-
-    env:
-      APP_NAME: "task-app-frontend"
-    
     steps:
       # 1. Checkout the repository
       - name: Checkout code
@@ -87,6 +85,10 @@ jobs:
       - checkout-and-image-build
 
     steps:
+      - name: Set image variables
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+
       - name: Deploy to Kind Cluster via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
