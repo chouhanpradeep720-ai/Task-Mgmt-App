@@ -66,7 +66,7 @@ jobs:
           push: false  # Abhi push nahi karna hai
           load: true   # Local Docker daemon mein image save karein (taki scan aur push dono ho sakein)
           tags: |
-          ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APP_NAME }}:${{ steps.vars.outputs.sha_short }}
+           ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APP_NAME }}:${{ steps.vars.outputs.sha_short }}
       # Push Docker Image To Docker Hub
       - name: Push Docker Image
         run: |
