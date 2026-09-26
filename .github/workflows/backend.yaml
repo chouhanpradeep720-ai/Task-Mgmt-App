@@ -1,0 +1,108 @@
+name: Backend Service CICD
+
+on:
+  push:
+    branches:
+      - k8s_deploy
+    paths:
+      - "backend/*"
+      - ".github/workflows/backend.yaml"
+env:
+  APP_NAME: "task-app-backend"      
+jobs:
+  checkout-and-image-build:
+    name: checkout and image build
+    runs-on: ubuntu-latest  
+    
+    outputs:
+      image_tag: ${{ steps.vars.outputs.sha_short }}
+      
+    steps:
+      #  Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v4\
+        with:
+         fetch-depth: 0
+
+      # Gitleaks secret scan
+      - name: Gitleaks secret scan 
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+       #  Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: backend/package-lock.json  
+      #  Install dependencies
+      - name: Dependencies Install
+        working-directory: ./backend
+        run: |
+          npm ci --omit=dev
+       #  Run Linting
+      - name: Run Lint
+        working-directory: ./backend
+        run: |
+          npm run lint 
+      #  Login To Docker Hub
+      - name: Docker login
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      #  GitHub SHA ko 7 characters mein convert 
+      - name: Set Short SHA
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT 
+      # Build Docker image 
+      - name: Build Docker image
+        uses: docker/build-push-action@v6 
+        with:
+        context: ./backend
+        filename: ./backend/Dockerfile
+        push: false  # Abhi push nahi karna hai
+        load: true   # Local Docker daemon mein image save karein (taki scan aur push dono ho sakein)
+        tags: |
+         ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APP_NAME }}:${{ steps.vars.outputs.sha_short }}
+      # Push Docker Image To Docker Hub
+      - name: Push Docker Image
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APP_NAME }}:${{ steps.vars.outputs.sha_short }}
+
+  deploy-to-kind:
+    name: deploy to kind cluster
+    runs-on: ubuntu-latest
+
+    needs:
+      - checkout-and-image-build   
+
+    steps:
+      - name: Deploy To kind Cluster Via SSH
+        uses: appleboy/ssh-action@v1.0.3  
+        with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        key: ${{ secrets.EC2_SSH_KEY }}
+        port: 22
+        script: |
+          bash -lc '
+            echo "Starting backend deployment..."
+
+            kubectl set image deployment/backend-deployment \
+            backend=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APP_NAME }}:${{ needs.checkout-and-image-build.outputs.image_tag }} \
+          -n task-management
+
+            echo "Waiting for rollout..."
+
+            kubectl rollout status deployment/backend-deployment \
+            -n task-management \
+            --timeout=180s
+
+            echo "Backend deployment completed successfully."
+
+            kubectl get pods -n task-management '
+
+

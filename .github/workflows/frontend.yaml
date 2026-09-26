@@ -57,7 +57,7 @@ jobs:
         id: vars
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT    
       # 8. Build Docker Image
-      - name: 7. Build and push Docker image
+      - name: Build  Docker image
         uses: docker/build-push-action@v6
         with:
           context: ./frontend
@@ -76,7 +76,7 @@ jobs:
           ignore-unfixed: true
           severity: 'HIGH,CRITICAL'    
       # 10. Image Push To Docker Hub
-      - name: Pushing Image To Docker Hub
+      - name: Push Docker Image To Docker Hub
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APP_NAME }}:${{ steps.vars.outputs.sha_short }}
 
