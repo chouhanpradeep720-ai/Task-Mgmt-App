@@ -83,26 +83,26 @@ jobs:
       - name: Deploy To kind Cluster Via SSH
         uses: appleboy/ssh-action@v1.0.3  
         with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USERNAME }}
-        key: ${{ secrets.EC2_SSH_KEY }}
-        port: 22
-        script: |
-          bash -lc '
-            echo "Starting backend deployment..."
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
+            bash -lc '
+              echo "Starting backend deployment..."
 
-            kubectl set image deployment/backend-deployment \
-            backend=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APP_NAME }}:${{ needs.checkout-and-image-build.outputs.image_tag }} \
-          -n task-management
+              kubectl set image deployment/backend-deployment \
+              backend=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APP_NAME }}:${{ needs.checkout-and-image-build.outputs.image_tag }} \
+            -n task-management
 
-            echo "Waiting for rollout..."
+              echo "Waiting for rollout..."
 
-            kubectl rollout status deployment/backend-deployment \
-            -n task-management \
-            --timeout=180s
+              kubectl rollout status deployment/backend-deployment \
+              -n task-management \
+              --timeout=180s
 
-            echo "Backend deployment completed successfully."
+              echo "Backend deployment completed successfully."
 
-            kubectl get pods -n task-management '
+              kubectl get pods -n task-management '
 
 
