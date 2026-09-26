@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  namespace: task-management
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: pradeepchouhan115/task-app-backend:1.1
+        ports:
+        - containerPort: 5000
+        env:
+        - name: PORT
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: PORT
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: backend-aws-secret
+              key: DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            secretKeyRef:
+              name: backend-aws-secret
+              key: DB_PORT
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: backend-aws-secret
+              key: DB_USER
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: backend-aws-secret
+              key: DB_NAME
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: backend-aws-secret
+              key: DB_PASSWORD      
+        - name: ADMIN_USERNAME      
+          valueFrom:
+            secretKeyRef:
+              name: backend-aws-secret
+              key: ADMIN_USERNAME
+        - name: ADMIN_PASSWORD      
+          valueFrom:
+            secretKeyRef:
+              name: backend-aws-secret
+              key: ADMIN_PASSWORD
+

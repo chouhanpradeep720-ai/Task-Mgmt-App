@@ -15,7 +15,7 @@ spec:
     spec:
        containers:
        - name: frontend
-         image: pradeepchouhan115/task-app-frontend:0.3
+         image: pradeepchouhan115/task-app-frontend:1.1
          ports:
          - containerPort: 80
          livenessProbe:
