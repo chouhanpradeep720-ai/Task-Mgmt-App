@@ -89,10 +89,6 @@ jobs:
       - checkout-and-image-build
 
     steps:
-      # - name: Set image variables
-      #   id: vars
-      #   run: echo "sha_short=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
-
       - name: Deploy to Kind Cluster via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -102,10 +98,10 @@ jobs:
           port: 22
           script: |
            bash -lc '
-              kubectl version --client
-              echo "DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}"
-              echo "APP_NAME=${{ env.APP_NAME }}"
-              echo "SHA_SHORT=${{ needs.checkout-and-image-build.outputs.image_tag }}"
+              # kubectl version --client
+              # echo "DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}"
+              # echo "APP_NAME=${{ env.APP_NAME }}"
+              # echo "SHA_SHORT=${{ needs.checkout-and-image-build.outputs.image_tag }}"
               # 1. Image update karein
               kubectl set image deployment/frontend-deployment frontend=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APP_NAME }}:${{ needs.checkout-and-image-build.outputs.image_tag }} -n task-management
               

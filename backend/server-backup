@@ -1,3 +1,4 @@
+cat ~/Task-Mgmt-App/backend/database/createAdmin.js
 const pool = require("../config/db");
 
 async function createAdmin() {
@@ -11,20 +12,12 @@ async function createAdmin() {
     }
 
     const existingAdmin = await pool.query(
-      "SELECT id, password FROM users WHERE username = $1",
+      "SELECT id FROM users WHERE username = $1",
       [username]
     );
 
     if (existingAdmin.rows.length > 0) {
-      await pool.query(
-        `UPDATE users
-         SET password = $1,
-             role = 'admin'
-         WHERE username = $2`,
-        [password, username]
-      );
-
-      console.log(`✅ Admin '${username}' password synchronized successfully.`);
+      console.log(`✅ Admin '${username}' already exists.`);
       return;
     }
 
@@ -36,7 +29,7 @@ async function createAdmin() {
 
     console.log(`✅ Admin '${username}' created successfully.`);
   } catch (error) {
-    console.error("❌ Failed to create/sync admin:", error.message);
+    console.error("❌ Failed to create admin:", error.message);
     throw error;
   }
 }
