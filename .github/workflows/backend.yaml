@@ -41,7 +41,7 @@ jobs:
       - name: Dependencies Install
         working-directory: ./backend
         run: |
-          npm ci --omit=dev
+          npm ci 
        #  Run Linting
       - name: Run Lint
         working-directory: ./backend
