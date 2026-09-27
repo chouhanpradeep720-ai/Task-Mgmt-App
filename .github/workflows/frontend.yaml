@@ -20,43 +20,49 @@ jobs:
       image_tag: ${{ steps.vars.outputs.sha_short }}
 
     steps:
-      # 1. Checkout the repository
+      # Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Set up Node.js
+      # Gitleaks secret scan
+      - name: Gitleaks secret scan 
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      #  Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "22"
           cache: "npm"
           cache-dependency-path: frontend/package-lock.json
-      # 3. Install dependencies
+      #  Install dependencies
       - name: Dependencies Install
         working-directory: ./frontend
         run: |
           npm ci
-      # 4. Build Frontend
+      #  Build Frontend
       - name: Build Frontend
         working-directory: ./frontend
         run: |
           npm run build
-      # 5. Run Linting
+      #  Run Linting
       - name: Run Lint
         working-directory: ./frontend
         run: |
           npm run lint 
-      # 6. Login To Docker Hub
+      #  Login To Docker Hub
       - name: Docker login
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      # 7. GitHub SHA ko 7 characters mein convert karne ke liye
+      #  GitHub SHA ko 7 characters mein convert karne ke liye
       - name: Set Short SHA
         id: vars
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT    
-      # 8. Build Docker Image
+      #  Build Docker Image
       - name: Build  Docker image
         uses: docker/build-push-action@v6
         with:
@@ -66,7 +72,7 @@ jobs:
           load: true   # Local Docker daemon mein image save karein (taki scan aur push dono ho sakein)  
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APP_NAME }}:${{ steps.vars.outputs.sha_short }}
-      # 9. Image Scane       
+      #  Image Scane       
       - name: Trivy vulnerability scan
         uses: aquasecurity/trivy-action@v0.36.0
         with:
@@ -75,7 +81,7 @@ jobs:
           exit-code: '1'
           ignore-unfixed: true
           severity: 'HIGH,CRITICAL'    
-      # 10. Image Push To Docker Hub
+      #  Image Push To Docker Hub
       - name: Push Docker Image To Docker Hub
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APP_NAME }}:${{ steps.vars.outputs.sha_short }}
@@ -107,4 +113,8 @@ jobs:
               
               # 2. Status verify karein (90 seconds tak wait karega)
               kubectl rollout status deployment/frontend-deployment -n task-management --timeout=30s
+
+              echo "Backend deployment completed successfully."
+
+              kubectl get pods -n task-management 
             '
