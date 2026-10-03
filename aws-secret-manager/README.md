@@ -24,7 +24,7 @@ aws-secret-manager/
 | `README.md`            | Documentation for the complete secret-management setup                     |
 | `secret-store.yaml`    | Configures how External Secrets Operator connects to AWS Secrets Manager   |
 | `external-secret.yaml` | Defines which AWS secret properties should be synchronized into Kubernetes |
-| `backend-deployment-asm.yaml| Conatain Asm Variable                                                 |
+| `backend-deployment-asm.yaml`| Contains the backend deployment configuration for retrieving secrets from AWS Secrets Manager.                                                 |
 
 ---
 
