@@ -1168,7 +1168,6 @@ Kubernetes
 ```
 
 **Project:** Task Management Application
-**Team:** Cloud Commanders
 **Platform:** Kubernetes / AWS EKS
 **Monitoring:** Prometheus + Grafana
 **Logging:** Loki + Grafana Alloy
