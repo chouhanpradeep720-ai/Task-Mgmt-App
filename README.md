@@ -37,7 +37,12 @@ The project started as a Dockerized application and was later deployed using Kub
 
 ---
 
-# 🏗️ Architecture
+## 🏗️ Architecture
+
+<!-- Place your architecture image at images/architecture.png in the repository. -->
+
+![Task Management App Architecture](images/architecture.png)
+
 
 ## Current Architecture
 
@@ -322,6 +327,75 @@ docker compose logs -f database
 | Metrics    | `http://localhost:5000/metrics` |
 | PostgreSQL | `localhost:5432`                |
 
+---
+
+
+---
+
+# ☁️ AWS Production Architecture
+
+The following architecture represents the **target production architecture** for the project.
+
+Some components are currently planned and are not yet fully implemented.
+
+```text
+                         INTERNET
+                            │
+                            ▼
+                     Amazon CloudFront
+                            │
+                            ▼
+                       AWS WAF
+                            │
+                            ▼
+              Application Load Balancer
+                            │
+                            ▼
+                    ┌──────────────┐
+                    │  AWS VPC     │
+                    │              │
+                    │    EC2       │
+                    │      │       │
+                    │    Nginx     │
+                    │      │       │
+                    │  ┌───┴───┐   │
+                    │  │       │   │
+                    │ React  Node  │
+                    │ Frontend Backend
+                    │          │   │
+                    └──────────┼───┘
+                               │
+                               ▼
+                         AWS RDS
+                         PostgreSQL
+```
+### Target Observability Architecture
+
+```text
+Application
+     │
+     ├──────────► Metrics ──────► Prometheus ──────► Grafana
+     │
+     ├──────────► Traces ───────► Tempo ───────────► Grafana
+     │
+     └──────────► Logs ─────────► Fluent Bit ──────► CloudWatch
+```
+
+### Target Security Architecture
+
+```text
+                         AWS IAM
+                            │
+                            ▼
+                           EC2
+                            │
+              ┌─────────────┼─────────────┐
+              ▼             ▼             ▼
+       Secrets Manager  CloudWatch    AWS Services
+              │
+              ▼
+        Application Secrets
+```
 ---
 
 # ☸️ Kubernetes Deployment
@@ -1911,3 +1985,4 @@ These features are intentionally listed as **Future Improvements** so that the R
 Built as a practical Cloud & DevOps learning project.
 
 </div>
+
