@@ -8,5 +8,6 @@ data:
   DB_PORT: "5432"
   DB_USER: postgres
   DB_NAME: task_management
-  ADMIN_USERNAME: cloudeadmin
+  ADMIN_USERNAME: cloudeadmin 
   PORT: "5000"
+  DB_SSL: "false" # RDS ke liye ture kar na hoga

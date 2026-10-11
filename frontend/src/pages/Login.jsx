@@ -15,6 +15,7 @@ function Login() {
     const [username, setUsername] = useState("");
 
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
 
 
@@ -41,12 +42,12 @@ function Login() {
                 "true"
             );
 
-	   localStorage.setItem(
-              "role",
-           response.data.user.role
-           );
+            localStorage.setItem(
+                "role",
+                response.data.user.role
+            );
 
-		
+
 
 
             localStorage.setItem(
@@ -112,15 +113,6 @@ function Login() {
                         Manage • Deploy • Monitor
                     </span>
 
-
-
-                    <div className="zidd-badge">
-
-                        ZIDD 2.0
-
-                    </div>
-
-
                 </div>
 
 
@@ -144,7 +136,7 @@ function Login() {
 
                         value={username}
 
-                        onChange={(e)=>setUsername(e.target.value)}
+                        onChange={(e) => setUsername(e.target.value)}
 
                     />
 
@@ -157,19 +149,26 @@ function Login() {
                     </label>
 
 
+                    <div className="password-wrapper">
 
-                    <input
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            placeholder="Enter password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            autoComplete="current-password"
+                        />
 
-                        type="password"
+                        <button
+                            type="button"
+                            className="password-toggle"
+                            onClick={() => setShowPassword(!showPassword)}
+                            aria-label={showPassword ? "Hide password" : "Show password"}
+                        >
+                            {showPassword ? "👁️" : "👁️"}
+                        </button>
 
-                        placeholder="Enter password"
-
-                        value={password}
-
-                        onChange={(e)=>setPassword(e.target.value)}
-
-                    />
-
+                    </div>
 
 
 
@@ -179,7 +178,7 @@ function Login() {
 
                         <label>
 
-                            <input type="checkbox"/>
+                            <input type="checkbox" />
 
                             Remember me
 

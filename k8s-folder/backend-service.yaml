@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: backend
   namespace: task-management
+  labels:
+    app: backend
 spec:
   selector:
     app: backend

@@ -4,6 +4,7 @@ metadata:
   name: frontend-service
   namespace: task-management
 spec:
+  type: ClusterIP
   selector:
     app: frontend
   ports:

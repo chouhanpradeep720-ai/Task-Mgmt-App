@@ -1,214 +1,202 @@
-.login-page{
+.login-page {
 
 
-    min-height:100vh;
+    min-height: 100vh;
 
 
-    display:flex;
+    display: flex;
 
 
-    justify-content:center;
+    justify-content: center;
 
 
-    align-items:center;
+    align-items: center;
 
 
 
     background:
 
 
-    linear-gradient(
+        linear-gradient(135deg,
 
-        135deg,
+            #e0f2fe,
 
-        #e0f2fe,
+            #ffffff,
 
-        #ffffff,
-
-        #dbeafe
-
-    );
+            #dbeafe);
 
 
 }
 
 
 
-.login-card{
+.login-card {
 
 
-    width:420px;
+    width: 420px;
 
 
-    padding:45px;
+    padding: 45px;
 
 
-    background:white;
+    background: white;
 
 
-    border-radius:28px;
+    border-radius: 28px;
 
 
     box-shadow:
 
 
-    0 25px 70px
-
-    rgba(37,99,235,.15);
+        0 25px 70px rgba(37, 99, 235, .15);
 
 
 }
 
 
 
-.login-logo{
+.login-logo {
 
 
-    text-align:center;
+    text-align: center;
 
 
-    margin-bottom:35px;
+    margin-bottom: 35px;
 
 
 }
 
 
 
-.cloud-icon{
+.cloud-icon {
 
 
-    width:90px;
+    width: 90px;
 
 
-    height:90px;
+    height: 90px;
 
 
-    margin:auto;
+    margin: auto;
 
 
-    display:flex;
+    display: flex;
 
 
-    justify-content:center;
+    justify-content: center;
 
 
-    align-items:center;
+    align-items: center;
 
 
-    font-size:55px;
+    font-size: 55px;
 
 
-    border-radius:30px;
+    border-radius: 30px;
 
 
-    background:#eff6ff;
+    background: #eff6ff;
 
 
     box-shadow:
 
 
-    0 0 35px
-
-    rgba(56,189,248,.5);
+        0 0 35px rgba(56, 189, 248, .5);
 
 
 }
 
 
 
-.login-logo h1{
+.login-logo h1 {
 
 
-    margin-top:20px;
+    margin-top: 20px;
 
 
-    color:#0f172a;
+    color: #0f172a;
 
 
-    font-size:32px;
-
-
-}
-
-
-
-.login-logo p{
-
-
-    color:#64748b;
+    font-size: 32px;
 
 
 }
 
 
 
-.login-logo span{
+.login-logo p {
 
 
-    color:#2563eb;
-
-
-    font-size:14px;
+    color: #64748b;
 
 
 }
 
 
 
-.zidd-badge{
+.login-logo span {
 
 
-    display:inline-block;
+    color: #2563eb;
 
 
-    margin-top:15px;
+    font-size: 14px;
 
 
-    padding:7px 20px;
+}
 
 
-    border-radius:20px;
+
+/* .zidd-badge {
 
 
-    color:white;
+    display: inline-block;
+
+
+    margin-top: 15px;
+
+
+    padding: 7px 20px;
+
+
+    border-radius: 20px;
+
+
+    color: white;
 
 
     background:
 
 
-    linear-gradient(
+        linear-gradient(90deg,
 
-        90deg,
+            #2563eb,
 
-        #2563eb,
-
-        #06b6d4
-
-    );
+            #06b6d4);
 
 
-}
+} */
 
 
 
 
 
-.login-card label{
+.login-card label {
 
 
-    display:block;
+    display: block;
 
 
-    margin-top:18px;
+    margin-top: 18px;
 
 
-    margin-bottom:8px;
+    margin-bottom: 8px;
 
 
-    color:#1e293b;
+    color: #1e293b;
 
 
-    font-weight:600;
+    font-weight: 600;
 
 
 }
@@ -219,43 +207,41 @@
 
 .login-card input[type="text"],
 
-.login-card input[type="password"]{
+.login-card input[type="password"] {
 
 
-    width:100%;
+    width: 100%;
 
 
-    padding:14px;
+    padding: 14px;
 
 
-    border-radius:12px;
+    border-radius: 12px;
 
 
-    border:1px solid #cbd5e1;
+    border: 1px solid #cbd5e1;
 
 
-    font-size:15px;
+    font-size: 15px;
 
 
 }
 
 
 
-.login-card input:focus{
+.login-card input:focus {
 
 
-    outline:none;
+    outline: none;
 
 
-    border-color:#2563eb;
+    border-color: #2563eb;
 
 
     box-shadow:
 
 
-    0 0 0 4px
-
-    rgba(37,99,235,.15);
+        0 0 0 4px rgba(37, 99, 235, .15);
 
 
 }
@@ -263,122 +249,134 @@
 
 
 
-.login-options{
+.login-options {
 
 
-    display:flex;
+    display: flex;
 
 
-    justify-content:space-between;
+    justify-content: space-between;
 
 
-    margin-top:20px;
+    margin-top: 20px;
 
 
-    font-size:14px;
+    font-size: 14px;
 
 
-    color:#64748b;
-
-
-}
-
-
-
-.login-options label{
-
-
-    margin:0;
-
-
-    font-weight:normal;
+    color: #64748b;
 
 
 }
 
 
 
+.login-options label {
 
 
-.login-card button{
+    margin: 0;
 
 
-    width:100%;
+    font-weight: normal;
 
 
-    margin-top:30px;
+}
 
 
-    padding:15px;
 
 
-    border:none;
+
+.login-card button {
 
 
-    border-radius:14px;
+    width: 100%;
 
 
-    color:white;
+    margin-top: 30px;
 
 
-    font-size:17px;
+    padding: 15px;
 
 
-    font-weight:bold;
+    border: none;
+
+
+    border-radius: 14px;
+
+
+    color: white;
+
+
+    font-size: 17px;
+
+
+    font-weight: bold;
 
 
     background:
 
 
-    linear-gradient(
+        linear-gradient(90deg,
 
-        90deg,
+            #2563eb,
 
-        #2563eb,
-
-        #06b6d4
-
-    );
+            #06b6d4);
 
 
-    cursor:pointer;
+    cursor: pointer;
 
 
 }
 
 
 
-.login-card button:hover{
+.login-card button:hover {
 
 
-    transform:translateY(-2px);
-
-
-}
-
-
-
-
-
-.login-footer{
-
-
-    text-align:center;
-
-
-    margin-top:30px;
-
-
-    color:#64748b;
+    transform: translateY(-2px);
 
 
 }
 
 
-.login-footer small{
 
 
-    font-size:12px;
+
+.login-footer {
+
+
+    text-align: center;
+
+
+    margin-top: 30px;
+
+
+    color: #64748b;
 
 
 }
+
+
+.login-footer small {
+
+
+    font-size: 12px;
+
+
+}
+
+/* ================================
+   Password Show / Hide
+================================ */
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 50px;
+    box-sizing: border-box;
+}
+

@@ -30,7 +30,7 @@ function Sidebar() {
 
             section.scrollIntoView({
 
-                behavior:"smooth"
+                behavior: "smooth"
 
             });
 
@@ -91,11 +91,6 @@ function Sidebar() {
                     <h3>
                         Cloud Commander
                     </h3>
-
-
-                    <span>
-                        ZIDD 2.0
-                    </span>
 
 
                 </div>

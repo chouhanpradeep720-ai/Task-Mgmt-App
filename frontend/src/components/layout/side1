@@ -1,97 +1,92 @@
 function Sidebar() {
 
-    return (
+return (
 
-        <aside className="sidebar">
-
-
-            <div className="sidebar-brand">
+<aside className="sidebar">
 
 
-                <div className="logo-circle">
-
-                    ☁️
-
-                </div>
+    <div className="sidebar-brand">
 
 
-                <div>
+        <div className="logo-circle">
 
-                    <h3>
-                        Cloud Commander
-                    </h3>
+            ☁️
 
-                    <span>
-                        ZIDD 2.0
-                    </span>
-
-                </div>
+        </div>
 
 
-            </div>
+        <div>
+
+            <h3>
+                Cloud Commander
+            </h3>
+        </div>
+
+
+    </div>
 
 
 
-            <div className="menu">
+    <div className="menu">
 
 
-                <div className="menu-item active">
+        <div className="menu-item active">
 
-                    🏠 Dashboard
+            🏠 Dashboard
 
-                </div>
-
-
-                <div className="menu-item">
-
-                    ✅ Tasks
-
-                </div>
+        </div>
 
 
-                <div className="menu-item">
+        <div className="menu-item">
 
-                    📊 Analytics
+            ✅ Tasks
 
-                </div>
-
-
-                <div className="menu-item">
-
-                    ⚙ Settings
-
-                </div>
+        </div>
 
 
-            </div>
+        <div className="menu-item">
+
+            📊 Analytics
+
+        </div>
+
+
+        <div className="menu-item">
+
+            ⚙ Settings
+
+        </div>
+
+
+    </div>
 
 
 
 
-            <div className="status-box">
+    <div className="status-box">
 
 
-                <h4>
-                    System Status
-                </h4>
+        <h4>
+            System Status
+        </h4>
 
 
-                <p>
-                    🟢 API Server Online
-                </p>
+        <p>
+            🟢 API Server Online
+        </p>
 
 
-                <p>
-                    🟢 Database Connected
-                </p>
+        <p>
+            🟢 Database Connected
+        </p>
 
 
-            </div>
+    </div>
 
 
-        </aside>
+</aside>
 
-    );
+);
 
 }
 
